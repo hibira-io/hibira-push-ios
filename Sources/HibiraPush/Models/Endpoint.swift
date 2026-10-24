@@ -3,12 +3,10 @@ import Foundation
 /// The base URL the SDK sends device and reporting requests to.
 ///
 /// Resolved in this order: `PushNotifications.shared.setEndpoint(_:)`,
-/// the `HibiraPushEndpoint` key in the app's Info.plist (or its pre-rename
-/// name `HikibiPushEndpoint`), then `defaultURL`.
+/// the `HibiraPushEndpoint` key in the app's Info.plist, then `defaultURL`.
 struct Endpoint {
-    static let defaultURL = "https://ws.hikibi.io"
+    static let defaultURL = "https://ws.hibira.io"
     static let infoPlistKey = "HibiraPushEndpoint"
-    static let legacyInfoPlistKey = "HikibiPushEndpoint"
 
     private static let queue = DispatchQueue(label: "io.hibira.push.endpointQueue")
     private static var override: String?
@@ -17,11 +15,9 @@ struct Endpoint {
         if let value = queue.sync(execute: { override }) {
             return value
         }
-        for key in [infoPlistKey, legacyInfoPlistKey] {
-            if let value = Bundle.main.object(forInfoDictionaryKey: key) as? String,
-               let normalized = normalize(value) {
-                return normalized
-            }
+        if let value = Bundle.main.object(forInfoDictionaryKey: infoPlistKey) as? String,
+           let normalized = normalize(value) {
+            return normalized
         }
         return defaultURL
     }

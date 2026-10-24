@@ -21,7 +21,7 @@ import Foundation
      Set the server the SDK talks to, for example a self-hosted server.
 
      Call it before `start`. It applies to every instance and overrides the
-     `HibiraPushEndpoint` Info.plist key. The default is `https://ws.hikibi.io`.
+     `HibiraPushEndpoint` Info.plist key. The default is `https://ws.hibira.io`.
 
      - Parameter endpoint: Base URL such as `https://push.example.com`, or `nil` to use the default.
      */
