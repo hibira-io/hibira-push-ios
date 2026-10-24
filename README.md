@@ -81,8 +81,7 @@ or in code, before `start`:
 PushNotifications.shared.setEndpoint("https://push.example.com")
 ```
 
-The value set in code wins over Info.plist. The pre-rename key
-`HikibiPushEndpoint` is still read.
+The value set in code wins over Info.plist.
 
 ## Moving from the Beams Swift SDK
 
