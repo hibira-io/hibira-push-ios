@@ -1,6 +1,6 @@
 excluded:
   - .build
-  - Sources/HikibiPush/Helpers/MD5.swift # this dependency will be removed in the future version of the SDK
+  - Sources/HibiraPush/Helpers/MD5.swift # this dependency will be removed in the future version of the SDK
   - Carthage
   - Package.swift
 

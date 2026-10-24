@@ -1,29 +1,29 @@
-# Hikibi Push for iOS and macOS
+# Hibira Push for iOS and macOS
 
-Swift client for [Hikibi Push](https://hikibi.io), the push notification
-service in Hikibi. Hikibi Push speaks a Beams-compatible device API, and this
+Swift client for [Hibira Push](https://hikibi.io), the push notification
+service of Hibira. Hibira Push speaks a Beams-compatible device API, and this
 package is an MIT-licensed fork of `pusher/push-notifications-swift` 4.1.0
 with the host made configurable.
 
 - iOS 15 or macOS 12 and later.
-- Delivery uses APNs. Upload your APNs `.p8` key in the Hikibi portal (app
+- Delivery uses APNs. Upload your APNs `.p8` key in the Hibira portal (app
   page, Push notifications) and enable the Push Notifications capability in Xcode.
 
 ## Installation
 
 Swift Package Manager only. In Xcode choose File > Add Package Dependencies
-and enter `https://github.com/hikibi-io/hikibi-push-ios`, or in `Package.swift`:
+and enter `https://github.com/hibira-io/hibira-push-ios`, or in `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/hikibi-io/hikibi-push-ios", from: "1.0.0")
+.package(url: "https://github.com/hibira-io/hibira-push-ios", from: "1.0.0")
 ```
 
-and add the `HikibiPush` product to your target.
+and add the `HibiraPush` product to your target.
 
 ## Usage
 
 ```swift
-import HikibiPush
+import HibiraPush
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -63,7 +63,7 @@ PushNotifications.shared.setUserId("user-1", tokenProvider: tokenProvider) { err
 ```
 
 Your backend returns `{"token": "..."}`, made with `generateToken` from any
-Beams-compatible server SDK and your Hikibi secret key.
+Beams-compatible server SDK and your Hibira secret key.
 
 ### Host
 
@@ -71,7 +71,7 @@ The SDK uses `https://ws.hikibi.io`. Self-hosted servers or another region can
 set the host in Info.plist:
 
 ```xml
-<key>HikibiPushEndpoint</key>
+<key>HibiraPushEndpoint</key>
 <string>https://push.example.com</string>
 ```
 
@@ -81,14 +81,15 @@ or in code, before `start`:
 PushNotifications.shared.setEndpoint("https://push.example.com")
 ```
 
-The value set in code wins over Info.plist.
+The value set in code wins over Info.plist. The pre-rename key
+`HikibiPushEndpoint` is still read.
 
 ## Moving from the Beams Swift SDK
 
 | Before | After |
 |---|---|
-| `https://github.com/pusher/push-notifications-swift` | `https://github.com/hikibi-io/hikibi-push-ios` |
-| `import PushNotifications` | `import HikibiPush` |
+| `https://github.com/pusher/push-notifications-swift` | `https://github.com/hibira-io/hibira-push-ios` |
+| `import PushNotifications` | `import HibiraPush` |
 | `BeamsTokenProvider` | `PushTokenProvider` |
 | `PusherAlreadyRegisteredError` | `AlreadyRegisteredError` |
 
@@ -108,4 +109,4 @@ instances and are not included.
 
 MIT. See [LICENSE](LICENSE). Based on
 [pusher/push-notifications-swift](https://github.com/pusher/push-notifications-swift),
-Copyright (c) 2017 Pusher. Hikibi is not affiliated with Pusher.
+Copyright (c) 2017 Pusher. Hibira is not affiliated with Pusher.

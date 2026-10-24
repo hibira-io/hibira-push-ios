@@ -7,15 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.0.0] - 2026-10-22
+## [1.0.0] - 2026-10-24
 
-First release of the Hikibi fork of `pusher/push-notifications-swift` 4.1.0.
+First release of the Hibira fork of `pusher/push-notifications-swift` 4.1.0.
 
 ### Changed
-- The Swift package and module are `HikibiPush`.
+- The Swift package and module are `HibiraPush`.
 - `BeamsTokenProvider` is `PushTokenProvider`, `PusherAlreadyRegisteredError` is `AlreadyRegisteredError`.
 - The SDK talks to `https://ws.hikibi.io` by default. Set another host with
-  `PushNotifications.shared.setEndpoint(_:)` or the `HikibiPushEndpoint` Info.plist key.
+  `PushNotifications.shared.setEndpoint(_:)` or the `HibiraPushEndpoint` Info.plist key
+  (`HikibiPushEndpoint`, from before the Hikibi → Hibira rename, is read too).
 - Distributed through Swift Package Manager only.
 
 The entries below are from the upstream project.
