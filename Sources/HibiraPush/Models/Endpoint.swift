@@ -6,7 +6,7 @@ import Foundation
 /// the `HibiraPushEndpoint` key in the app's Info.plist (or its pre-rename
 /// name `HikibiPushEndpoint`), then `defaultURL`.
 struct Endpoint {
-    static let defaultURL = "https://ws.hikibi.io"
+    static let defaultURL = "https://ws.hibira.io"
     static let infoPlistKey = "HibiraPushEndpoint"
     static let legacyInfoPlistKey = "HikibiPushEndpoint"
 
