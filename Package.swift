@@ -2,12 +2,12 @@
 
 import PackageDescription
 
-let package = Package(name: "HikibiPush",
+let package = Package(name: "HibiraPush",
                       platforms: [.macOS("12.0"),
                                   .iOS("15.0")],
                       products: [
-                        .library(name: "HikibiPush",
-                                 targets: ["HikibiPush"])
+                        .library(name: "HibiraPush",
+                                 targets: ["HibiraPush"])
                       ],
                       dependencies: [
                         .package(url: "https://github.com/Quick/Nimble",
@@ -16,9 +16,9 @@ let package = Package(name: "HikibiPush",
                                  .upToNextMajor(from: "9.1.0"))
                       ],
                       targets: [
-                        .target(name: "HikibiPush"),
-                        .testTarget(name: "HikibiPushTests",
-                                    dependencies: ["HikibiPush",
+                        .target(name: "HibiraPush"),
+                        .testTarget(name: "HibiraPushTests",
+                                    dependencies: ["HibiraPush",
                                                    "Nimble",
                                                    .product(name: "OHHTTPStubs", package: "OHHTTPStubs"),
                                                    .product(name: "OHHTTPStubsSwift", package: "OHHTTPStubs")])
