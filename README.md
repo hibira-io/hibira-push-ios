@@ -15,7 +15,7 @@ Swift Package Manager only. In Xcode choose File > Add Package Dependencies
 and enter `https://github.com/hibira-io/hibira-push-ios`, or in `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/hibira-io/hibira-push-ios", from: "1.0.0")
+.package(url: "https://github.com/hibira-io/hibira-push-ios", from: "1.1.0")
 ```
 
 and add the `HibiraPush` product to your target.
