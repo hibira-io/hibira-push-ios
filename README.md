@@ -108,4 +108,4 @@ instances and are not included.
 
 MIT. See [LICENSE](LICENSE). Based on
 [pusher/push-notifications-swift](https://github.com/pusher/push-notifications-swift),
-Copyright (c) 2017 Pusher. Hibira is not affiliated with Pusher.
+Copyright (c) 2017 Pusher.
