@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-16
+
+### Added
+- The `HibiraChat` library: a client for the Hibira Chat API's user routes,
+  `ChatSocket` for live `chat.*` events after `pusher:signin` (no other
+  dependency), and `ConversationModel` / `ConversationListModel`
+  (`ObservableObject`s) for a conversation and the user's conversations with unread counts.
+- Translations: `ChatMessage.language`, `translations` and `text(for:)`,
+  `ChatClient.translate`, `setLanguage` and `me`.
+
 ## [1.1.0] - 2026-10-25
 
 ### Changed

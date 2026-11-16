@@ -7,7 +7,9 @@ let package = Package(name: "HibiraPush",
                                   .iOS("15.0")],
                       products: [
                         .library(name: "HibiraPush",
-                                 targets: ["HibiraPush"])
+                                 targets: ["HibiraPush"]),
+                        .library(name: "HibiraChat",
+                                 targets: ["HibiraChat"])
                       ],
                       dependencies: [
                         .package(url: "https://github.com/Quick/Nimble",
@@ -17,6 +19,9 @@ let package = Package(name: "HibiraPush",
                       ],
                       targets: [
                         .target(name: "HibiraPush"),
+                        .target(name: "HibiraChat"),
+                        .testTarget(name: "HibiraChatTests",
+                                    dependencies: ["HibiraChat"]),
                         .testTarget(name: "HibiraPushTests",
                                     dependencies: ["HibiraPush",
                                                    "Nimble",
