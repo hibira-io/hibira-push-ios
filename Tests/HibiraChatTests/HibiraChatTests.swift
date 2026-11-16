@@ -263,10 +263,10 @@ final class ChatSocketTests: XCTestCase {
         let sub2 = try JSONDecoder().decode([String: JSONValue].self, from: Data(sent.items[1].utf8))
         XCTAssertEqual(sub2["data"]?["channel"], "#server-to-user-ann")
 
-        socket.handle(#"{"event":"pusher_internal:subscription_succeeded","channel":"#server-to-user-ann","data":"{}"}"#)
+        socket.handle(##"{"event":"pusher_internal:subscription_succeeded","channel":"#server-to-user-ann","data":"{}"}"##)
         XCTAssertEqual(socket.state, .live)
         XCTAssertEqual(lives, 1)
-        socket.handle(#"{"event":"chat.typing","channel":"#server-to-user-ann","data":"{\"conversation_id\":\"c\",\"user_id\":\"bob\",\"typing\":true}"}"#)
+        socket.handle(##"{"event":"chat.typing","channel":"#server-to-user-ann","data":"{\"conversation_id\":\"c\",\"user_id\":\"bob\",\"typing\":true}"}"##)
         XCTAssertEqual(events, [.typing(conversationId: "c", userId: "bob", typing: true)])
         socket.handle(#"{"event":"pusher:ping","data":"{}"}"#)
         XCTAssertTrue(sent.items.last?.contains("pusher:pong") ?? false)
