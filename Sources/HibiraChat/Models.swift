@@ -111,6 +111,16 @@ public struct ChatMessage: Codable, Hashable, Identifiable, Sendable {
     public var attachments: [ChatAttachment]
     /// The roles this message is limited to (internal notes), if any.
     public var visibleTo: [String]
+    /// The language `text` was written in, when the app sets users' languages.
+    public var language: String?
+    /// `text` translated, by BCP 47 language tag.
+    public var translations: [String: String]
+
+    /// The text to show a reader of `lang`: its translation when there is one, else `text`.
+    public func text(for lang: String?) -> String {
+        guard let lang = lang else { return text }
+        return translations[lang] ?? text
+    }
 
     public var isSystem: Bool { kind == "system" }
     public var isDeleted: Bool { deletedAt != nil }
@@ -119,11 +129,13 @@ public struct ChatMessage: Codable, Hashable, Identifiable, Sendable {
     enum CodingKeys: String, CodingKey {
         case id, seq, sender, name, kind, text, metadata, reactions, attachments
         case createdAt = "created_at", editedAt = "edited_at", deletedAt = "deleted_at", visibleTo = "visible_to"
+        case language, translations
     }
 
     public init(id: String, seq: Int, sender: String? = nil, name: String? = nil, kind: String = "text", text: String = "",
                 metadata: [String: JSONValue] = [:], createdAt: String? = nil, editedAt: String? = nil, deletedAt: String? = nil,
-                reactions: [String: [String]] = [:], attachments: [ChatAttachment] = [], visibleTo: [String] = []) {
+                reactions: [String: [String]] = [:], attachments: [ChatAttachment] = [], visibleTo: [String] = [],
+                language: String? = nil, translations: [String: String] = [:]) {
         self.id = id
         self.seq = seq
         self.sender = sender
@@ -137,6 +149,8 @@ public struct ChatMessage: Codable, Hashable, Identifiable, Sendable {
         self.reactions = reactions
         self.attachments = attachments
         self.visibleTo = visibleTo
+        self.language = language
+        self.translations = translations
     }
 
     public init(from decoder: Decoder) throws {
@@ -157,6 +171,8 @@ public struct ChatMessage: Codable, Hashable, Identifiable, Sendable {
         reactions = try c.decodeIfPresent([String: [String]].self, forKey: .reactions) ?? [:]
         attachments = try c.decodeIfPresent([ChatAttachment].self, forKey: .attachments) ?? []
         visibleTo = try c.decodeIfPresent([String].self, forKey: .visibleTo) ?? []
+        language = try opt(.language)
+        translations = try c.decodeIfPresent([String: String].self, forKey: .translations) ?? [:]
     }
 }
 

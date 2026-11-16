@@ -175,6 +175,14 @@ public final class ConversationModel: ObservableObject {
         return m
     }
 
+    /// Translates message `seq` into `language` on request.
+    @discardableResult
+    public func translate(_ seq: Int, language: String) async throws -> ChatMessage {
+        let m = try await client.translate(conversationId, seq: seq, language: language)
+        merge([m])
+        return m
+    }
+
     /// Adds the user's reaction, or takes it back if they already reacted with `emoji`.
     @discardableResult
     public func toggleReaction(_ seq: Int, emoji: String) async throws -> ChatMessage {

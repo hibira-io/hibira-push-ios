@@ -131,6 +131,24 @@ final class ChatClientTests: XCTestCase {
         }
     }
 
+    func testSetsTheLanguageAndTranslates() async throws {
+        StubProtocol.handler = { req in
+            if req.path.hasSuffix("/translations") {
+                return (200, #"{"message":{"seq":3,"text":"hi","language":"en","translations":{"ja":"やあ"}}}"#)
+            }
+            return (200, #"{"user_id":"ann","language":"ja"}"#)
+        }
+        let client = ChatClient(appId: "a", host: "https://chat.test", session: stubSession()) { jwt("ann") }
+        let lang = try await client.setLanguage("ja")
+        XCTAssertEqual(lang, "ja")
+        XCTAssertEqual(StubProtocol.requests.first?.method, "PUT")
+        XCTAssertEqual(StubProtocol.requests.first?.path, "/apps/a/chat/me/")
+        let m = try await client.translate("c", seq: 3, language: "ja")
+        XCTAssertEqual(m.text(for: "ja"), "やあ")
+        XCTAssertEqual(m.text(for: "ko"), "hi")
+        XCTAssertEqual(StubProtocol.requests.last?.path, "/apps/a/chat/me/conversations/c/messages/3/translations")
+    }
+
     func testParsesEvents() {
         let e = ChatEvent(name: "chat.read", data: Data(#"{"conversation_id":"c","user_id":"bob","read_seq":7}"#.utf8))
         XCTAssertEqual(e, .read(conversationId: "c", userId: "bob", readSeq: 7))

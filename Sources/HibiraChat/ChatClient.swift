@@ -286,6 +286,30 @@ public final class ChatClient: @unchecked Sendable {
         _ = try await call("POST", conv(id) + "/typing", body: ["typing": .bool(typing)])
     }
 
+    /// Translates message `seq` into `language` (a BCP 47 tag) and keeps it on
+    /// the message. Needs a Chat add-on on the hosted service (403 on the free
+    /// allowance, 429 past the monthly cap).
+    @discardableResult
+    public func translate(_ id: String, seq: Int, language: String) async throws -> ChatMessage {
+        try decode(MessageBox.self, try await call("POST", conv(id) + "/messages/\(seq)/translations",
+                                                   body: ["language": .string(language)])).message
+    }
+
+    /// The user's settings: `user_id` and `language`.
+    public func me() async throws -> [String: JSONValue] {
+        try decode([String: JSONValue].self, try await call("GET", "/"))
+    }
+
+    /// Sets the language messages are translated into for this user (a BCP 47
+    /// tag such as `ja` or `zh-TW`; nil for none). Returns the language kept.
+    @discardableResult
+    public func setLanguage(_ language: String?) async throws -> String? {
+        let d = try decode([String: JSONValue].self,
+                           try await call("PUT", "/", body: ["language": language.map(JSONValue.string) ?? .null]))
+        guard let l = d["language"]?.stringValue, !l.isEmpty else { return nil }
+        return l
+    }
+
     /// Uploads a file (up to 25 MB) straight to storage; send the returned
     /// attachment in a message's `attachments`.
     public func upload(_ id: String, name: String, contentType: String, data: Data) async throws -> ChatAttachment {
