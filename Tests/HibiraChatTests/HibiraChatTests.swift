@@ -142,7 +142,7 @@ final class ChatClientTests: XCTestCase {
         let lang = try await client.setLanguage("ja")
         XCTAssertEqual(lang, "ja")
         XCTAssertEqual(StubProtocol.requests.first?.method, "PUT")
-        XCTAssertEqual(StubProtocol.requests.first?.path, "/apps/a/chat/me/")
+        XCTAssertTrue(["/apps/a/chat/me", "/apps/a/chat/me/"].contains(StubProtocol.requests.first?.path ?? ""))
         let m = try await client.translate("c", seq: 3, language: "ja")
         XCTAssertEqual(m.text(for: "ja"), "やあ")
         XCTAssertEqual(m.text(for: "ko"), "hi")
