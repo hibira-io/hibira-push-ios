@@ -13,7 +13,7 @@ import Foundation
 /// through ``handleEvent(name:data:)``.
 public final class ChatClient: @unchecked Sendable {
     public static let defaultHost = "api.hibira.io"
-    public static let version = "1.2.0"
+    public static let version = "1.3.0"
 
     public let appId: String
     private let base: String
