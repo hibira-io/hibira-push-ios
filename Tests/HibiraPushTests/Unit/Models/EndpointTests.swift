@@ -9,11 +9,11 @@ class EndpointTests: XCTestCase {
     }
 
     func testDefaultEndpoint() {
-        XCTAssertEqual(Endpoint.current, "https://ws.hibira.io")
+        XCTAssertEqual(Endpoint.current, "https://api.hibira.io")
         XCTAssertEqual(URL.PushNotifications.devices(instanceId: "abc")?.absoluteString,
-                       "https://ws.hibira.io/device_api/v1/instances/abc/devices/apns")
+                       "https://api.hibira.io/device_api/v1/instances/abc/devices/apns")
         XCTAssertEqual(URL.PushNotifications.events(instanceId: "abc")?.absoluteString,
-                       "https://ws.hibira.io/reporting_api/v2/instances/abc/events")
+                       "https://api.hibira.io/reporting_api/v2/instances/abc/events")
     }
 
     func testSetEndpoint() {
@@ -23,6 +23,6 @@ class EndpointTests: XCTestCase {
                        "https://push.example.com/device_api/v1/instances/abc/devices/apns/d1")
 
         PushNotifications.shared.setEndpoint("")
-        XCTAssertEqual(PushNotifications.shared.endpoint, "https://ws.hibira.io")
+        XCTAssertEqual(PushNotifications.shared.endpoint, "https://api.hibira.io")
     }
 }

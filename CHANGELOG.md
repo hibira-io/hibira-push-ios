@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+- HibiraPush: the default endpoint is now `https://api.hibira.io`, Hibira's API host.
+  `https://ws.hibira.io` keeps working, so existing apps need no change.
+
 ## [1.2.0] - 2026-11-16
 
 ### Added
