@@ -5,7 +5,7 @@ import Foundation
 /// Resolved in this order: `PushNotifications.shared.setEndpoint(_:)`,
 /// the `HibiraPushEndpoint` key in the app's Info.plist, then `defaultURL`.
 struct Endpoint {
-    static let defaultURL = "https://ws.hibira.io"
+    static let defaultURL = "https://api.hibira.io"
     static let infoPlistKey = "HibiraPushEndpoint"
 
     private static let queue = DispatchQueue(label: "io.hibira.push.endpointQueue")
